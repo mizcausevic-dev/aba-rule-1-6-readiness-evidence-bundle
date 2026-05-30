@@ -1,0 +1,137 @@
+{
+  "evidence_bundle_profile_version": "0.1",
+  "profile_id": "aba-rule-1-6-readiness-v0.1",
+  "title": "ABA Model Rule 1.6 + Privilege + Work-Product Readiness Evidence Bundle",
+  "purpose": "Profile of the Evidence Bundle spec scoped to evidence a law firm's or legal-AI vendor's program toward ABA Model Rules 1.1 Comment 8 (competence with technology), 1.6 + 1.6(c) (confidentiality + reasonable efforts), 1.7 / 1.9 (conflict of interest), 3.3 (candor toward tribunal — anti-hallucination), 5.3 (responsibilities re non-lawyer assistants extended to AI), 5.5 (unauthorized practice of law); attorney-client privilege preservation (common law); work-product doctrine preservation (Fed. R. Civ. P. 26(b)(3)); plus state-bar overlay obligations from CA / NY / FL / DC / PA / TX / IL bar opinions. NOT a state-bar attestation. NOT a substitute for outside-counsel ethics-program review.",
+  "applies_to": [
+    "law-firm-with-licensed-attorneys",
+    "in-house-legal-department",
+    "legal-ai-vendor-marketed-to-attorneys",
+    "matter-management-platform-with-ai-features",
+    "ediscovery-platform-with-ai-features",
+    "contract-lifecycle-management-with-ai-features",
+    "litigation-funder-using-ai"
+  ],
+  "obligation_families": [
+    {
+      "code": "aba-rule-1-1-c8-competence",
+      "title": "Competence with Technology (Rule 1.1 Comment 8)",
+      "citation": "ABA Model Rule 1.1 Comment 8 + ABA Formal Op 512 + state-bar competence opinions",
+      "summary": "Lawyer must understand the AI tool well enough to supervise its use. Evidence: written technology-competence policy, per-tool understanding attestation, periodic re-evaluation.",
+      "required_evidence_kinds": [
+        "firm-technology-competence-policy-document",
+        "per-tool-attorney-competence-attestation",
+        "annual-tool-re-evaluation-record",
+        "cle-completion-record-on-ai-tools"
+      ]
+    },
+    {
+      "code": "aba-rule-1-6-confidentiality",
+      "title": "Confidentiality + Reasonable Efforts (Rule 1.6 + 1.6(c))",
+      "citation": "ABA Model Rule 1.6 + 1.6(c) + ABA Formal Op 512 + CA Bar Practical Guidance 2023",
+      "summary": "Confidentiality of client information across AI workflows. Reasonable efforts to prevent disclosure. Vendor due diligence on AI tool data-handling.",
+      "required_evidence_kinds": [
+        "vendor-due-diligence-attestation-per-ai-tool",
+        "ai-vendor-data-residency-disclosure",
+        "ai-vendor-training-data-use-prohibition-contract-clause",
+        "encryption-at-rest-and-in-transit-attestation",
+        "incident-response-playbook-with-ai-disclosure",
+        "client-informed-consent-template-for-ai-use"
+      ]
+    },
+    {
+      "code": "aba-rule-1-7-1-9-conflict",
+      "title": "Conflict of Interest (Rules 1.7 + 1.9)",
+      "citation": "ABA Model Rule 1.7 + 1.9 + state-bar conflict-screening opinions",
+      "summary": "Conflict-of-interest screening, especially for current and former clients, when AI tools have cross-matter or cross-firm context.",
+      "required_evidence_kinds": [
+        "conflict-check-pre-emption-policy-document",
+        "cross-matter-firewall-attestation",
+        "former-client-information-quarantine-attestation",
+        "ai-tool-tenant-isolation-documentation"
+      ]
+    },
+    {
+      "code": "aba-rule-3-3-candor",
+      "title": "Candor Toward the Tribunal (Rule 3.3) — anti-hallucination",
+      "citation": "ABA Model Rule 3.3 + Mata v. Avianca (S.D.N.Y. 2023) + PA Joint Op 2024-200 + IL Bar Op 24-04",
+      "summary": "No AI-generated content reaches a tribunal without independent verification. Citation validation is mandatory before filing. The signature post-Mata-v-Avianca obligation.",
+      "required_evidence_kinds": [
+        "citation-validation-policy-document",
+        "citation-validation-tool-attestation",
+        "filed-document-attorney-review-attestation",
+        "hallucination-incident-log-with-zero-tribunal-leakage-attestation"
+      ]
+    },
+    {
+      "code": "aba-rule-5-3-supervision",
+      "title": "Supervision of Non-Lawyer Assistants Extended to AI (Rule 5.3)",
+      "citation": "ABA Model Rule 5.3 + ABA Formal Op 512",
+      "summary": "AI tools are non-lawyer assistants; same supervision obligation. Designated supervising attorney per AI workflow.",
+      "required_evidence_kinds": [
+        "supervising-attorney-designation-per-ai-tool",
+        "supervising-attorney-bar-status-verification",
+        "ai-output-review-policy-document",
+        "rejection-rate-tracking-of-ai-output"
+      ]
+    },
+    {
+      "code": "aba-rule-5-5-upl-screen",
+      "title": "Unauthorized Practice of Law Screen (Rule 5.5)",
+      "citation": "ABA Model Rule 5.5 + TX COLE Op 705 + state UPL statutes",
+      "summary": "AI tools may not give legal advice directly to non-clients without attorney involvement. Marketing materials may not imply lawyer-equivalence.",
+      "required_evidence_kinds": [
+        "upl-screen-policy-document",
+        "marketing-claims-review-attestation",
+        "direct-to-consumer-routing-guardrail-documentation",
+        "ai-output-disclaimer-template"
+      ]
+    },
+    {
+      "code": "attorney-client-privilege-preservation",
+      "title": "Attorney-Client Privilege Preservation",
+      "citation": "Attorney-client privilege (common law) + state evidence codes + ABA Formal Op 512",
+      "summary": "Privilege must be preserved across the AI workflow. Vendor-side data access, third-party access, and AI training use all risk waiver.",
+      "required_evidence_kinds": [
+        "privilege-preservation-policy-document",
+        "vendor-contract-no-training-data-use-clause",
+        "vendor-contract-no-third-party-disclosure-clause",
+        "privilege-log-completeness-attestation",
+        "ai-vendor-employee-non-disclosure-attestation"
+      ]
+    },
+    {
+      "code": "work-product-doctrine-preservation",
+      "title": "Work-Product Doctrine Preservation (Fed. R. Civ. P. 26(b)(3))",
+      "citation": "Fed. R. Civ. P. 26(b)(3) + Hickman v. Taylor + state work-product equivalents",
+      "summary": "Work product (attorney mental impressions, litigation strategy) must remain unilaterally controlled. AI tool storage of work-product material risks doctrine waiver.",
+      "required_evidence_kinds": [
+        "work-product-tagging-policy-document",
+        "ai-workspace-data-retention-attestation",
+        "ai-vendor-litigation-hold-cooperation-clause",
+        "work-product-doctrine-training-record-for-attorneys"
+      ]
+    }
+  ],
+  "non_obligations_explicitly": [
+    "This bundle does NOT cover state bar discipline outcomes; those depend on bar-investigation findings.",
+    "This bundle does NOT cover criminal-defense-specific obligations (Sixth Amendment effective assistance, Brady disclosure) — those need a separate criminal-defense overlay.",
+    "This bundle does NOT cover judicial AI use rules (those bind judges, not attorneys)."
+  ],
+  "intended_consumers": [
+    "law-firm-managing-partner",
+    "law-firm-general-counsel",
+    "law-firm-information-security-officer",
+    "state-bar-disciplinary-counsel-during-investigation",
+    "ai-vendor-procurement-disclosure-to-law-firm-buyer",
+    "outside-counsel-ethics-program-reviewer"
+  ],
+  "related": {
+    "kg_protocol_suite_url": "https://suite.kineticgain.com",
+    "evidence_bundle_spec": "https://github.com/mizcausevic-dev/evidence-bundle-spec",
+    "sibling_operator_audit_stream": "https://github.com/mizcausevic-dev/matter-decision-record-audit-stream",
+    "sibling_state_bar_tracker": "https://github.com/mizcausevic-dev/state-bar-ai-disclosure-tracker",
+    "sibling_vault_contract": "https://github.com/mizcausevic-dev/attorney-client-data-vault-contract-profile",
+    "sibling_incident_card": "https://github.com/mizcausevic-dev/legal-ai-incident-card-profile"
+  }
+}
