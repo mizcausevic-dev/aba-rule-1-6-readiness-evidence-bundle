@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.0-prod — 2026-05-31
+
+- Hardened to v1.0-prod per squad doctrine; member of the LegalTech vertical 6-pack.
+- Spec-component repo (no Pages deploy required); AGPL-3.0-or-later, synthetic example data only.
+- Pulse universe entry not applicable (no custom subdomain).
+
+
+
 ## [0.1] — 2026-05-30
 
 ### Added
