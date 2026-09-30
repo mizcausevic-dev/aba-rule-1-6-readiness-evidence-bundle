@@ -13,11 +13,11 @@ A **structured readiness checklist** for discussion with qualified counsel and t
 | # | Family | Anchor |
 | --- | --- | --- |
 | 1 | Competence with Technology | ABA Rule 1.1 Comment 8 + ABA Formal Op 512 |
-| 2 | Confidentiality + Reasonable Efforts | ABA Rule 1.6 + 1.6(c) + CA Bar Practical Guidance 2023 |
+| 2 | Confidentiality + Reasonable Efforts | ABA Rule 1.6 + 1.6(c) + CA Bar Practical Guidance (updated 2026) |
 | 3 | Conflict of Interest | ABA Rule 1.7 + 1.9 |
 | 4 | Candor Toward the Tribunal (anti-hallucination) | ABA Rule 3.3 + Mata v. Avianca + PA Joint Op 2024-200 |
-| 5 | Supervision of AI as Non-Lawyer Assistant | ABA Rule 5.3 + ABA Formal Op 512 |
-| 6 | Unauthorized Practice of Law Screen | ABA Rule 5.5 + TX COLE Op 705 |
+| 5 | Lawyer supervision in AI workflows | ABA Rule 5.3 + ABA Formal Op 512 |
+| 6 | Unauthorized Practice of Law Screen | ABA Rule 5.5 + applicable state UPL rules |
 | 7 | Attorney-Client Privilege Preservation | Common-law privilege + state evidence codes |
 | 8 | Work-Product Doctrine Preservation | Fed. R. Civ. P. 26(b)(3) + Hickman v. Taylor |
 
@@ -39,14 +39,38 @@ node scripts/validate-profile.mjs profile.json
 
 # Run the validator's regression tests
 node --test tests/validate-profile.test.mjs
+
+# Validate the profile-to-builder mapping in the synthetic example
+node scripts/validate-builder-fixture.mjs
+node --test tests/validate-builder-fixture.test.mjs
 ```
 
 This repository does not assemble client evidence. Keep client names, matter details,
 privileged material, and work product out of this public profile and its tests.
-The separate [Evidence Bundle builder](https://github.com/mizcausevic-dev/evidence-bundle-builder)
-uses a bundle directory plus metadata to create a manifest; it has no documented
-`--profile`/`--inputs` interface, and its npm package was unavailable when checked
-on 2026-09-29. Follow its repository instructions if you choose to use it.
+The [synthetic example](./fixtures/synthetic-bundle/meta.json) maps two fictional
+files to profile evidence-kind identifiers through builder item labels. It is a
+format and integration fixture, not completed readiness evidence or a legal
+assessment. The [separate Evidence Bundle builder](https://github.com/mizcausevic-dev/evidence-bundle-builder)
+reads `content/` and `--meta` JSON, writes a SHA-256 manifest, and verifies it.
+It does not consume this profile directly or implement a `--profile` flag. Its
+npm package was unavailable when checked on 2026-09-29, so CI checks out
+builder source at commit `6b9d666ea8205d4ad1e515321e8cdad7b387c59a`.
+For a local integration check, from this repository's root:
+
+```bash
+git clone https://github.com/mizcausevic-dev/evidence-bundle-builder.git .builder
+git -C .builder checkout --detach 6b9d666ea8205d4ad1e515321e8cdad7b387c59a
+npm ci --prefix .builder --ignore-scripts
+npm run build --prefix .builder
+node .builder/dist/cli.js fixtures/synthetic-bundle --meta fixtures/synthetic-bundle/meta.json
+node .builder/dist/cli.js fixtures/synthetic-bundle --verify
+git diff --exit-code -- fixtures/synthetic-bundle/manifest.json
+```
+
+The builder is AGPL-3.0-or-later and remains a separate tool; assess its
+license before distributing an integrated application. Do not put client,
+privileged, or matter material into this public fixture. A real use needs
+access controls, redaction, retention, and counsel's fact-specific review.
 
 ## Composes with
 

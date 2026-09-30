@@ -1,0 +1,42 @@
+{
+  "evidence_bundle_version": "0.1",
+  "bundle": {
+    "id": "synthetic-aba-readiness-example",
+    "subject": "Fictional ABA readiness mapping example; no client or matter data",
+    "purpose": "due-diligence",
+    "creator": "Kinetic Gain synthetic fixture",
+    "created_at": "2026-09-29T00:00:00.000Z",
+    "labels": {
+      "profile_id": "aba-rule-1-6-readiness-v0.1",
+      "synthetic": "true"
+    }
+  },
+  "items": [
+    {
+      "id": "synthetic-policy",
+      "path": "content/fictional-ai-use-policy.md",
+      "media_type": "text/markdown",
+      "sha256": "b8f410ce8a1a0dbcbd80f97d8bc4aa886bff11904179215631d2af234c95db9b",
+      "size_bytes": 271,
+      "description": "Fictional placeholder illustrating a profile evidence-kind mapping, not a reviewed policy.",
+      "labels": {
+        "profile_id": "aba-rule-1-6-readiness-v0.1",
+        "evidence_kind": "firm-technology-competence-policy-document",
+        "synthetic": "true"
+      }
+    },
+    {
+      "id": "synthetic-vendor-review",
+      "path": "content/fictional-vendor-review.md",
+      "media_type": "text/markdown",
+      "sha256": "6155bc12a76874ee5739916a925c948c5905a0f9bf881c31e023855f320c4925",
+      "size_bytes": 254,
+      "description": "Fictional placeholder illustrating a profile evidence-kind mapping, not vendor due diligence.",
+      "labels": {
+        "profile_id": "aba-rule-1-6-readiness-v0.1",
+        "evidence_kind": "vendor-due-diligence-attestation-per-ai-tool",
+        "synthetic": "true"
+      }
+    }
+  ]
+}

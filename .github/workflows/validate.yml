@@ -13,9 +13,31 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "20"
       - run: node scripts/validate-profile.mjs profile.json
       - run: node --test tests/validate-profile.test.mjs
+      - run: node scripts/validate-builder-fixture.mjs
+      - run: node --test tests/validate-builder-fixture.test.mjs
+      - name: Checkout pinned Evidence Bundle builder
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: mizcausevic-dev/evidence-bundle-builder
+          ref: 6b9d666ea8205d4ad1e515321e8cdad7b387c59a
+          path: .builder
+          persist-credentials: false
+      - name: Build pinned builder
+        working-directory: .builder
+        run: |
+          npm ci --ignore-scripts
+          npm audit --omit=dev --audit-level=high
+          npm run build
+      - name: Assemble and verify synthetic bundle
+        run: |
+          node .builder/dist/cli.js fixtures/synthetic-bundle --meta fixtures/synthetic-bundle/meta.json
+          node .builder/dist/cli.js fixtures/synthetic-bundle --verify
+          git diff --exit-code -- fixtures/synthetic-bundle/manifest.json

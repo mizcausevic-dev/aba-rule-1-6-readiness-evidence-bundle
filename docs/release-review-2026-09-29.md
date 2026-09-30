@@ -42,11 +42,39 @@ or certification.
 ## Gates and rollback
 
 Qualified counsel must review the relevant jurisdictions and actual evidence
-before any customer-facing readiness claim. The upstream builder has no verified
-integration with this checklist. Candidate GitHub CI has not run. No deployment
+before any customer-facing readiness claim. The upstream builder has no native
+`--profile` interface. Candidate GitHub CI must run on each new review commit. No deployment
 or publication was performed. Revert the review commit to roll back these
 repository-only changes.
 
 Useful next enrichment: source URLs and review dates for every legal anchor,
-jurisdiction-specific overlays approved by counsel, and a tested profile-to-bundle
-mapping only after the upstream format supports one.
+jurisdiction-specific overlays approved by counsel, and upstream builder support
+for profile-aware validation rather than labels supplied by this repository.
+
+## Technical unblock wave (same date)
+
+- Added a two-file **synthetic** bundle with fixed metadata and a checked-in
+  SHA-256 manifest. Its item labels map to two existing profile evidence-kind
+  identifiers; this does not assert that any real control operates. A focused
+  validator rejects stale kind IDs, missing file mappings, and absent synthetic
+  labels. CI compiles the separate AGPL-licensed builder from immutable commit
+  `6b9d666ea8205d4ad1e515321e8cdad7b387c59a`, assembles the fixture,
+  verifies file hashes, and compares the generated manifest with the checked-in
+  artifact. Both CI actions are pinned to commit SHAs and checkout credentials
+  are not persisted. This is a tested fixture integration, not a native builder
+  profile feature or a client-evidence workflow.
+- Corrected the README's remaining stale California 2023 and Texas Opinion 705
+  table cells and its Rule 5.3 description to match the narrowed profile.
+- Executed `node scripts/validate-profile.mjs profile.json` (exit 0),
+  `node scripts/validate-builder-fixture.mjs` (exit 0), and
+  `node --test tests/validate-profile.test.mjs tests/validate-builder-fixture.test.mjs`
+  (exit 0, 7/7). The pinned builder's `npm ci --ignore-scripts`,
+  `npm run build`, and `npm test` exited 0 (17/17 builder tests). Its
+  `npm audit --omit=dev --audit-level=high` exited 0 with zero reported
+  production vulnerabilities; a full install reported five advisories in
+  development tooling (three moderate, two high). The local CLI assembled and
+  verified 2/2 items (exit 0 each), and a repeated build left the manifest's
+  SHA-256 unchanged. `actionlint -color=false` exited 0.
+- The new candidate workflow has not run on GitHub yet. No real client bundle,
+  legal sufficiency, license compatibility for a distributed integration, or
+  production controls were verified.
