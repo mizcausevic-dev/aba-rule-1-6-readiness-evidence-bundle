@@ -2,7 +2,7 @@
   "evidence_bundle_profile_version": "0.1",
   "profile_id": "aba-rule-1-6-readiness-v0.1",
   "title": "ABA Model Rule 1.6 + Privilege + Work-Product Readiness Evidence Bundle",
-  "purpose": "Profile of the Evidence Bundle spec scoped to evidence a law firm's or legal-AI vendor's program toward ABA Model Rules 1.1 Comment 8 (competence with technology), 1.6 + 1.6(c) (confidentiality + reasonable efforts), 1.7 / 1.9 (conflict of interest), 3.3 (candor toward tribunal — anti-hallucination), 5.3 (responsibilities re non-lawyer assistants extended to AI), 5.5 (unauthorized practice of law); attorney-client privilege preservation (common law); work-product doctrine preservation (Fed. R. Civ. P. 26(b)(3)); plus state-bar overlay obligations from CA / NY / FL / DC / PA / TX / IL bar opinions. NOT a state-bar attestation. NOT a substitute for outside-counsel ethics-program review.",
+  "purpose": "Draft checklist for discussing AI-related legal-practice safeguards and suggested evidence under ABA Model Rules 1.1 Comment 8, 1.6, 1.7, 1.9, 3.3, 5.3, and 5.5, plus privilege and work-product issues. This is not an Evidence Bundle manifest, legal advice, a state-specific overlay, a state-bar attestation, or a substitute for counsel's fact-specific review. Evidence kinds are profile completion criteria, not universal legal mandates.",
   "applies_to": [
     "law-firm-with-licensed-attorneys",
     "in-house-legal-department",
@@ -28,8 +28,8 @@
     {
       "code": "aba-rule-1-6-confidentiality",
       "title": "Confidentiality + Reasonable Efforts (Rule 1.6 + 1.6(c))",
-      "citation": "ABA Model Rule 1.6 + 1.6(c) + ABA Formal Op 512 + CA Bar Practical Guidance 2023",
-      "summary": "Confidentiality of client information across AI workflows. Reasonable efforts to prevent disclosure. Vendor due diligence on AI tool data-handling.",
+      "citation": "ABA Model Rule 1.6 + 1.6(c) + ABA Formal Op 512 + CA Bar Practical Guidance (updated 2026)",
+      "summary": "Assess confidentiality safeguards and vendor data handling for each AI workflow. Whether disclosure or informed consent is required depends on the tool, information, matter, and applicable rules.",
       "required_evidence_kinds": [
         "vendor-due-diligence-attestation-per-ai-tool",
         "ai-vendor-data-residency-disclosure",
@@ -54,8 +54,8 @@
     {
       "code": "aba-rule-3-3-candor",
       "title": "Candor Toward the Tribunal (Rule 3.3) — anti-hallucination",
-      "citation": "ABA Model Rule 3.3 + Mata v. Avianca (S.D.N.Y. 2023) + PA Joint Op 2024-200 + IL Bar Op 24-04",
-      "summary": "No AI-generated content reaches a tribunal without independent verification. Citation validation is mandatory before filing. The signature post-Mata-v-Avianca obligation.",
+      "citation": "ABA Model Rule 3.3 + Mata v. Avianca (S.D.N.Y. 2023) + PA Joint Op 2024-200",
+      "summary": "Require attorney review of AI-assisted court submissions, including verification of legal authorities and factual claims appropriate to the filing. Record that review before submission.",
       "required_evidence_kinds": [
         "citation-validation-policy-document",
         "citation-validation-tool-attestation",
@@ -67,7 +67,7 @@
       "code": "aba-rule-5-3-supervision",
       "title": "Supervision of Non-Lawyer Assistants Extended to AI (Rule 5.3)",
       "citation": "ABA Model Rule 5.3 + ABA Formal Op 512",
-      "summary": "AI tools are non-lawyer assistants; same supervision obligation. Designated supervising attorney per AI workflow.",
+      "summary": "Assess lawyer supervision duties for staff and outside services involved in AI workflows, alongside attorney competence and independent judgment. Record accountable review of each workflow.",
       "required_evidence_kinds": [
         "supervising-attorney-designation-per-ai-tool",
         "supervising-attorney-bar-status-verification",
@@ -78,8 +78,8 @@
     {
       "code": "aba-rule-5-5-upl-screen",
       "title": "Unauthorized Practice of Law Screen (Rule 5.5)",
-      "citation": "ABA Model Rule 5.5 + TX COLE Op 705 + state UPL statutes",
-      "summary": "AI tools may not give legal advice directly to non-clients without attorney involvement. Marketing materials may not imply lawyer-equivalence.",
+      "citation": "ABA Model Rule 5.5 + applicable state unauthorized-practice rules",
+      "summary": "Screen direct-to-consumer AI features and marketing claims for unauthorized-practice and lawyer-equivalence risks under applicable jurisdictional rules.",
       "required_evidence_kinds": [
         "upl-screen-policy-document",
         "marketing-claims-review-attestation",
@@ -91,7 +91,7 @@
       "code": "attorney-client-privilege-preservation",
       "title": "Attorney-Client Privilege Preservation",
       "citation": "Attorney-client privilege (common law) + state evidence codes + ABA Formal Op 512",
-      "summary": "Privilege must be preserved across the AI workflow. Vendor-side data access, third-party access, and AI training use all risk waiver.",
+      "summary": "Assess how vendor access, third-party disclosure, and training use may affect privilege in the particular matter; document safeguards and counsel's analysis.",
       "required_evidence_kinds": [
         "privilege-preservation-policy-document",
         "vendor-contract-no-training-data-use-clause",
@@ -104,7 +104,7 @@
       "code": "work-product-doctrine-preservation",
       "title": "Work-Product Doctrine Preservation (Fed. R. Civ. P. 26(b)(3))",
       "citation": "Fed. R. Civ. P. 26(b)(3) + Hickman v. Taylor + state work-product equivalents",
-      "summary": "Work product (attorney mental impressions, litigation strategy) must remain unilaterally controlled. AI tool storage of work-product material risks doctrine waiver.",
+      "summary": "Assess confidentiality, access, retention, and disclosure of litigation materials in AI tools; work-product protection and any waiver depend on the facts and governing law.",
       "required_evidence_kinds": [
         "work-product-tagging-policy-document",
         "ai-workspace-data-retention-attestation",

@@ -3,7 +3,7 @@
 ## 1.0.0-prod — 2026-05-31
 
 - Hardened to v1.0-prod per squad doctrine; member of the LegalTech vertical 6-pack.
-- Spec-component repo (no Pages deploy required); AGPL-3.0-or-later, synthetic example data only.
+- Spec-component repo (no Pages deploy required); MIT license per `LICENSE`, no client evidence included. The `1.0.0-prod` label is historical; the profile format remains a v0.1 draft.
 - Pulse universe entry not applicable (no custom subdomain).
 
 
