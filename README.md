@@ -1,49 +1,80 @@
 # aba-rule-1-6-readiness-evidence-bundle
 
-> **LegalTech Evidence Bundle (compliance) — Spec #3 of the LegalTech 6-pack.** Profile of the [Evidence Bundle spec](https://github.com/mizcausevic-dev/evidence-bundle-spec) scoped to law firms + legal-AI vendors. Covers ABA Model Rules 1.1c8 / 1.6 / 1.6(c) / 1.7 / 1.9 / 3.3 / 5.3 / 5.5 plus attorney-client privilege preservation plus work-product doctrine preservation plus state-bar overlay obligations.
+> **LegalTech readiness checklist.** This draft profile organizes evidence a law firm or legal-AI vendor may use when reviewing AI-related professional-responsibility controls. It is a companion to the [Evidence Bundle spec](https://github.com/mizcausevic-dev/evidence-bundle-spec), not an Evidence Bundle manifest or a claim of schema conformance.
 
 Part of the [Kinetic Gain Protocol Suite](https://suite.kineticgain.com).
 
-> Status: v0.1 draft. Profile at [`profile.json`](./profile.json).
+> Status: v0.1 draft. Profile at [`profile.json`](./profile.json). The historical `v1.0-prod` Git tag does not change this draft status.
 
 ## What this bundle is
 
-A **structured readiness checklist** that a law firm or legal-AI vendor can build (and an outside-counsel ethics-program reviewer can audit) toward eight obligation families:
+A **structured readiness checklist** for discussion with qualified counsel and the firm's security team. It groups suggested evidence under eight issue families:
 
 | # | Family | Anchor |
 | --- | --- | --- |
 | 1 | Competence with Technology | ABA Rule 1.1 Comment 8 + ABA Formal Op 512 |
-| 2 | Confidentiality + Reasonable Efforts | ABA Rule 1.6 + 1.6(c) + CA Bar Practical Guidance 2023 |
+| 2 | Confidentiality + Reasonable Efforts | ABA Rule 1.6 + 1.6(c) + CA Bar Practical Guidance (updated 2026) |
 | 3 | Conflict of Interest | ABA Rule 1.7 + 1.9 |
 | 4 | Candor Toward the Tribunal (anti-hallucination) | ABA Rule 3.3 + Mata v. Avianca + PA Joint Op 2024-200 |
-| 5 | Supervision of AI as Non-Lawyer Assistant | ABA Rule 5.3 + ABA Formal Op 512 |
-| 6 | Unauthorized Practice of Law Screen | ABA Rule 5.5 + TX COLE Op 705 |
+| 5 | Lawyer supervision in AI workflows | ABA Rule 5.3 + ABA Formal Op 512 |
+| 6 | Unauthorized Practice of Law Screen | ABA Rule 5.5 + applicable state UPL rules |
 | 7 | Attorney-Client Privilege Preservation | Common-law privilege + state evidence codes |
 | 8 | Work-Product Doctrine Preservation | Fed. R. Civ. P. 26(b)(3) + Hickman v. Taylor |
 
-**35 required evidence kinds total** across the 8 families. Every one is a discrete artifact a reviewer can ask to see (a written policy document, a contract clause excerpt, an attestation, a log).
+**35 evidence kinds** across the 8 families. `required_evidence_kinds` means required to complete *this profile*, not that every artifact is mandated by an ABA rule, a court, or a state bar. The right evidence and safeguards depend on the tool, client data, matter, and jurisdiction.
 
 ## What this bundle is NOT
 
 - Not a state-bar attestation. State bar disciplinary counsel may use this as a starting point during an investigation, but the bundle itself is not a finding.
 - Not a substitute for outside-counsel ethics-program review.
-- Not state-specific (state-bar overlays are referenced inside the families, not separated out as a 9th family).
+- Not state-specific. State-bar opinions are mentioned as research leads; no state-by-state overlay is implemented or verified here.
 - Not criminal-defense-specific (Sixth Amendment effective-assistance + Brady disclosure obligations need a separate overlay).
 - Not judge-facing (judicial AI use rules bind judges, not attorneys).
 
 ## Use
 
 ```bash
-# Validate the profile is well-formed
-node -e "JSON.parse(require('fs').readFileSync('profile.json','utf8'))"
+# Validate JSON structure, unique evidence identifiers, and the documented counts
+node scripts/validate-profile.mjs profile.json
 
-# Or feed it into the evidence-bundle-builder (the cross-vertical tool)
-npx evidence-bundle-builder build --profile profile.json --inputs ./your-evidence/
+# Run the validator's regression tests
+node --test tests/validate-profile.test.mjs
+
+# Validate the profile-to-builder mapping in the synthetic example
+node scripts/validate-builder-fixture.mjs
+node --test tests/validate-builder-fixture.test.mjs
 ```
+
+This repository does not assemble client evidence. Keep client names, matter details,
+privileged material, and work product out of this public profile and its tests.
+The [synthetic example](./fixtures/synthetic-bundle/meta.json) maps two fictional
+files to profile evidence-kind identifiers through builder item labels. It is a
+format and integration fixture, not completed readiness evidence or a legal
+assessment. The [separate Evidence Bundle builder](https://github.com/mizcausevic-dev/evidence-bundle-builder)
+reads `content/` and `--meta` JSON, writes a SHA-256 manifest, and verifies it.
+It does not consume this profile directly or implement a `--profile` flag. Its
+npm package was unavailable when checked on 2026-09-29, so CI checks out
+builder source at commit `6b9d666ea8205d4ad1e515321e8cdad7b387c59a`.
+For a local integration check, from this repository's root:
+
+```bash
+git clone https://github.com/mizcausevic-dev/evidence-bundle-builder.git .builder
+git -C .builder checkout --detach 6b9d666ea8205d4ad1e515321e8cdad7b387c59a
+npm ci --prefix .builder --ignore-scripts
+npm run build --prefix .builder
+node .builder/dist/cli.js fixtures/synthetic-bundle --meta fixtures/synthetic-bundle/meta.json
+node .builder/dist/cli.js fixtures/synthetic-bundle --verify
+git diff --exit-code -- fixtures/synthetic-bundle/manifest.json
+```
+
+The builder is AGPL-3.0-or-later and remains a separate tool; assess its
+license before distributing an integrated application. Do not put client,
+privileged, or matter material into this public fixture. A real use needs
+access controls, redaction, retention, and counsel's fact-specific review.
 
 ## Composes with
 
-- [`evidence-bundle-spec`](https://github.com/mizcausevic-dev/evidence-bundle-spec) — the upstream spec this profile conforms to
+- [`evidence-bundle-spec`](https://github.com/mizcausevic-dev/evidence-bundle-spec) — the separate upstream bundle format that this checklist can inform
 - [`evidence-bundle-builder`](https://github.com/mizcausevic-dev/evidence-bundle-builder) — the cross-vertical bundle assembler
 - [`matter-decision-record-audit-stream`](https://github.com/mizcausevic-dev/matter-decision-record-audit-stream) — the sibling Operator audit-stream that produces hash-chained evidence consumable by this bundle
 - [`state-bar-ai-disclosure-tracker`](https://github.com/mizcausevic-dev/state-bar-ai-disclosure-tracker) — the sibling state-bar tracker that contextualizes obligation-family evidence
@@ -52,7 +83,19 @@ npx evidence-bundle-builder build --profile profile.json --inputs ./your-evidenc
 
 ## Compliance posture
 
-**Readiness scaffolding** for ABA Model Rules + privilege + work-product programs. Producing a complete bundle is evidence of program maturity, not ABA-compliance certification. State bar discipline + outside-counsel attestation are separate processes. Per the standing public-language guardrail across the Suite.
+**Readiness scaffolding**, not legal advice, a finding that controls operate,
+or ABA/state-bar certification. A completed checklist does not establish that
+client information was protected or privilege preserved. Counsel must assess
+the applicable jurisdiction and facts, inspect actual artifacts, and decide
+whether any client disclosure or informed consent is required. See the
+[ABA Model Rules comparison charts](https://www.americanbar.org/groups/professional_responsibility/policy/rule_charts/)
+and [ABA Formal Opinion 512](https://www.americanbar.org/content/dam/aba/administrative/professional_responsibility/ethics-opinions/aba-formal-opinion-512.pdf)
+for primary starting points. Formal Opinion 512 explains that client consent
+depends on how the tool uses information relating to a representation.
+
+No client or matter data belongs in the public repository. Actual evidence
+bundles need restricted access, retention/deletion rules, and reviewer-approved
+redaction before disclosure.
 
 ## License
 
